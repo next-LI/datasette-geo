@@ -1,6 +1,6 @@
 import json
 from datasette import hookimpl
-from .mvt import MVTServer
+# from .mvt import MVTServer
 from .geojson import geojson_render
 from .util import get_geo_column, from_spatialite_geom
 from .inspect import get_spatial_tables, get_bounds
@@ -68,16 +68,16 @@ def extra_body_script(template, database, table, view_name, datasette):
     return ""
 
 
-@hookimpl
-def prepare_sanic(app, datasette):
-    mvt = MVTServer(datasette)
-    app.add_route(
-        mvt.tile_endpoint,
-        r"/-/tiles/<db_name:[^/]+>/<table:[^/]+?>/<z:int>/<x:int>/<y:int>.mvt",
-    )
-    app.add_route(
-        mvt.tilejson_endpoint, r"/-/tiles/<db_name:[^/]+>/<table:[^/]+?>.json"
-    )
+# @hookimpl
+# def prepare_sanic(app, datasette):
+#     mvt = MVTServer(datasette)
+#     app.add_route(
+#         mvt.tile_endpoint,
+#         r"/-/tiles/<db_name:[^/]+>/<table:[^/]+?>/<z:int>/<x:int>/<y:int>.mvt",
+#     )
+#     app.add_route(
+#         mvt.tilejson_endpoint, r"/-/tiles/<db_name:[^/]+>/<table:[^/]+?>.json"
+#     )
 
 
 @hookimpl
